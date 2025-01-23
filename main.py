@@ -2,6 +2,7 @@ import pygame
 from constants import *
 from player import *
 from asteroidfield import *
+import sys
 
 def main():
     updatable = pygame.sprite.Group()
@@ -13,10 +14,6 @@ def main():
     AsteroidField.containers = (updatable,)
 
     pygame.init()
-
-    print("Starting asteroids!")
-    print(f"Screen width: {SCREEN_WIDTH}")
-    print(f"Screen height: {SCREEN_HEIGHT}")
 
     # Create the screen and the clock object
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -33,15 +30,24 @@ def main():
                 return  
 
         # Update the screen
-        screen.fill((0, 0, 0))
+        
  # Update all objects in the updatable group
         for obj in updatable:
             obj.update(dt)
 
+        for asteroid in asteroids: 
+            if game_player.collisions(asteroid):
+                print("Game over!")
+                sys.exit()
+
 # Draw all objects in the drawable group
+        screen.fill((0, 0, 0))
         for obj in drawable:
             obj.draw(screen)
         pygame.display.flip()
+
+ 
+
 
       
 
