@@ -38,8 +38,12 @@ def main():
 
         # Collision check between bullets and asteroids
         collisions = pygame.sprite.groupcollide(
-            asteroids, shots_group, True, True, pygame.sprite.collide_circle
+            asteroids, shots_group, False, True, pygame.sprite.collide_circle
         )
+        for asteroid in collisions:
+            asteroid.split(
+
+            )
         if collisions:
             print(f"Collisions detected: {len(collisions)}")
 
